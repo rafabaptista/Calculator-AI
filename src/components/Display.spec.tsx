@@ -9,10 +9,11 @@ describe('Display', () => {
     expect(screen.getByRole('status', { name: 'Calculator display' })).toHaveTextContent('1 234 567.67')
   })
 
-  it('renders operator feedback immediately after the number', () => {
-    render(<Display value="1234" hint={null} operatorFeedback="+" />)
+  it('renders calculation history above the number', () => {
+    render(<Display value="1234" hint={null} calculationHistory="12 +" />)
 
-    expect(screen.getByRole('status', { name: 'Calculator display' })).toHaveTextContent('1 234 +')
+    expect(screen.getByRole('paragraph', { name: 'Calculation history' })).toHaveTextContent('12 +')
+    expect(screen.getByRole('status', { name: 'Calculator display' })).toHaveTextContent('1 234')
   })
 
   it('keeps partially typed values and errors unchanged', () => {
@@ -26,7 +27,7 @@ describe('Display', () => {
 
   it('shows and hides the hint state through its class', () => {
     const { rerender } = render(<Display value="0" hint={null} />)
-    const hint = screen.getByRole('paragraph')
+    const hint = document.querySelector('.calculator-hint')
 
     expect(hint).not.toHaveClass('calculator-hint--visible')
     rerender(<Display value="0" hint="Maximum 10 digits" />)

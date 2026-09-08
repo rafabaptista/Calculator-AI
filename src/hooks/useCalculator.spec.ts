@@ -83,16 +83,16 @@ describe('useCalculator', () => {
     expect(result.current.display).toBe('7')
   })
 
-  it('exposes operator feedback without changing the numeric display', () => {
+  it('exposes calculation history without changing the numeric display', () => {
     const { result } = renderHook(() => useCalculator())
 
     input(result, '12')
     act(() => result.current.handleInput('*'))
     expect(result.current.display).toBe('12')
-    expect(result.current.operatorFeedback).toBe('×')
+    expect(result.current.calculationHistory).toBe('12 ×')
 
     input(result, '3')
     expect(result.current.display).toBe('3')
-    expect(result.current.operatorFeedback).toBeNull()
+    expect(result.current.calculationHistory).toBe('12 ×')
   })
 })

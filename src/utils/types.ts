@@ -6,7 +6,6 @@ export interface CalculatorState {
   previousValue: number | null
   operation: Operation | null
   clearOnNext: boolean
-  operatorFeedback: string | null
 }
 
 export interface ButtonConfig {

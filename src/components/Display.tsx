@@ -1,7 +1,7 @@
 interface DisplayProps {
   value: string
   hint: string | null
-  operatorFeedback?: string | null
+  calculationHistory?: string | null
 }
 
 function formatDisplayValue(value: string) {
@@ -15,10 +15,11 @@ function formatDisplayValue(value: string) {
   return decimalPart === undefined ? `${sign}${formattedInteger}` : `${sign}${formattedInteger}.${decimalPart}`
 }
 
-export function Display({ value, hint, operatorFeedback = null }: DisplayProps) {
+export function Display({ value, hint, calculationHistory = null }: DisplayProps) {
   return (
     <>
-      <output className="calculator-display" aria-label="Calculator display"><span>{formatDisplayValue(value)}</span>{operatorFeedback && <span className="calculator-operator-feedback"> {operatorFeedback}</span>}</output>
+      <p className="calculator-history" aria-label="Calculation history">{calculationHistory}</p>
+      <output className="calculator-display" aria-label="Calculator display">{formatDisplayValue(value)}</output>
       <p className={`calculator-hint${hint ? ' calculator-hint--visible' : ''}`} aria-live="polite">{hint}</p>
     </>
   )
